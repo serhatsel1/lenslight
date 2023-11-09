@@ -8,7 +8,7 @@ const photoSchema = new Schema({
     required: true,
     trim: true,
   },
-  descripiton: {
+  description: {
     type: String,
     required: true,
     trim: true,

@@ -6,6 +6,7 @@ import conn from "./db.js";
 
 import pageRoute from "./routes/pageRoute.js";
 import photoRoute from "./routes/photoRoute.js";
+import userRoute from "./routes/userRoute.js";
 
 dotenv.config();
 
@@ -22,17 +23,19 @@ app.set("views", "views");
 
 //?static files middleware
 app.use(express.static("public"));
+app.use(express.json());
+app.use(express.urlencoded({extended:true}))
 
 app.use("/", pageRoute);
-app.use("/photo",photoRoute);
-
+app.use("/photos", photoRoute);
+app.use("/users", userRoute);
 
 /* app.get("/", (req, res) => {
   res.render("index");
 });
 
 app.get("/about", (req, res) => {
-  res.render("about");
+  res.render("about");d
 }); */
 
 app.listen(port, () => {
