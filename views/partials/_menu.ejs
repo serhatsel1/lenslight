@@ -20,7 +20,7 @@
                       <li><a href="blog.html">Blog</a></li>
                       <li><a href="contact.html">Contact</a></li> -->
                       <% if(user){ %>
-                        <li><a class="<%= link === "dashboard" && "active" %>" href="/dashboard">Dashboard</a></li>
+                        <li><a class="<%= link === "dashboard" && "active" %>" href="/users/dashboard">Dashboard</a></li>
                         <li><a href="/logout">Logout</a></li>
                         <% }else { %>
                            <li><a class="<%= link === "login" && "active" %>" href="/login">Login</a></li>

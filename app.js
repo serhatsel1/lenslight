@@ -7,7 +7,7 @@ import conn from "./db.js";
 import pageRoute from "./routes/pageRoute.js";
 import photoRoute from "./routes/photoRoute.js";
 import userRoute from "./routes/userRoute.js";
-import {checkUser} from "./middlewares/authMiddleware.js"
+import { checkUser } from "./middlewares/authMiddleware.js";
 dotenv.config();
 
 // connection to do db
@@ -27,8 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-
-app.get("*", checkUser);
+app.use("*", checkUser);
 app.use("/", pageRoute);
 app.use("/photos", photoRoute);
 app.use("/users", userRoute);
