@@ -9,21 +9,34 @@ const userSchema = new Schema(
     username: {
       type: String,
       required: [true, "Username area is required !"],
-      lowercase:true, 
-      validate:[validator.isAlphanumeric,"Only Alphanumeric charecters"],
+      lowercase: true,
+      validate: [validator.isAlphanumeric, "Only Alphanumeric charecters"],
     },
     email: {
       type: String,
       required: [true, "Email arae is required !"],
       unique: true,
-      validate:[validator.isEmail,"Valid email is requered !"]
+      validate: [validator.isEmail, "Valid email is requered !"],
     },
     password: {
       type: String,
       required: [true, "Password area is required !"],
-      minlength:[4,"Password is minimum length 'for' charecters"],
-      maxlength:[10,"Password is minimum length 'ten' charecters"]
+      minlength: [4, "Password is minimum length 'for' charecters"],
+      maxlength: [10, "Password is minimum length 'ten' charecters"],
     },
+    // takipçi birden fazla olabilir bu nedenle array olarak yaptık
+    followers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    followings: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     timestamps: true,
@@ -33,9 +46,7 @@ userSchema.pre("save", function (next) {
   const user = this;
 
   bcrypt.hash(user.password, 10, (err, hash) => {
-    (user.password = hash),
-
-    next();
+    (user.password = hash), next();
   });
 });
 
