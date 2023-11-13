@@ -20,6 +20,7 @@
             >
             <div style="margin-top: 30px">
               <ul style="display: flex; justify-content: space-between">
+                <% if(isOwner) {%>
                 <li>
                   <button style="min-width: 266px" class="read_more"
                   data-toggle="modal" data-target="#updateModal">
@@ -35,6 +36,7 @@
                     >Delete</a
                   >
                 </li>
+                <% } %>
               </ul>
             </div>
           </div>
@@ -110,12 +112,13 @@
                   <div style="margin-bottom: 20px" class="col-md-12">
                     <input type="file" name="image" class="form-control-file" />
                   </div>
-
+             
                   <div class="col-md-12">
                     <div class="group_form">
                       <button class="read_more">Update Photo</button>
                     </div>
                   </div>
+             
                 </div>
               </form>
             </div>

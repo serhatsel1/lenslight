@@ -1,8 +1,18 @@
 import nodemailer from "nodemailer";
+import Photo from "../models/photoModel.js";
+import User from "../models/userModel.js";
 
-const getIndexPage = (req, res) => {
+const getIndexPage = async (req, res) => {
+  const photos = await Photo.find().sort({ uplodadedAt: -1 }).limit(3);
+  // .sort({uplodadedAt:-1}) or.reverse({ uplodadedAt: 1 })
+  const numOfUser = await User.countDocuments({});
+  const numOfPhoto = await Photo.countDocuments({});
+
   res.render("index", {
     link: "index",
+    photos,
+    numOfUser,
+    numOfPhoto,
   });
 };
 
@@ -184,7 +194,7 @@ const sendMail = async (req, res) => {
     // async..await is not allowed in global scope, must use a wrapper
 
     // send mail with defined transport object
-      await transporter.sendMail({
+    await transporter.sendMail({
       to: "selserhat01@gmail.com", // list of receivers
       subject: `Mail from ${req.body.email} `, // Subject line
       text: "Hello world?", // plain text body
