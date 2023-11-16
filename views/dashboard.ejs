@@ -1,4 +1,12 @@
 <%- include("partials/_header") %>
+<style>
+  #uploadFile {
+    transition: transform 0.3s ease-in-out;
+  }
+  #uploadFile.clicked {
+    transform: rotate(360deg);
+  }
+</style>
 <body class="main-layout inner_page">
   <!-- loader  -->
   <div class="loader_bg">
@@ -96,64 +104,74 @@
       <% if(user.followers.length > 0) { %>
       <div class="team">
         <div class="container_with">
-           <div class="row">
-              <div class="col-md-12">
-                 <div class="titlepage text_align_center">
-           
-                    <h2>FOLLOWERS</h2>
-                 </div>
-              </div>
-              <% for (follower of user.followers) { %>
-              <div class="col-md-4">
-                 <div class="team_box text_align_center">
-                    <div class="team_img">
-                      <figure><img src="/images/team1.jpg" alt="#"/></figure>
-                    </div>
-                    <div class="craig">
-                      <h3><%= follower.username %></h3>
-                      <span>PHOTOGRAPHER</span>
-                      <ul class="social_icon ">
-                         <li><a href="/users/<%= follower._id %>"><i class="fa fa-external-link-square" aria-hidden="true"></i></a></li>
-                      </ul>
-                    </div>
-                 </div>
-              </div>
-              <% } %>
-           </div>
-        </div>
-     </div>
-     <% } %>
-     <% if(user.followings.length > 0) { %>
-     <div class="team">
-      <div class="container_with">
-         <div class="row">
+          <div class="row">
             <div class="col-md-12">
-               <div class="titlepage text_align_center">
-         
-                  <h2>FOLLOWINGS</h2>
-               </div>
+              <div class="titlepage text_align_center">
+                <h2>FOLLOWERS</h2>
+              </div>
             </div>
-            <% for (following of  user.followings) { %>
+            <% for (follower of user.followers) { %>
             <div class="col-md-4">
-               <div class="team_box text_align_center">
-                  <div class="team_img">
-                    <figure><img src="/images/team1.jpg" alt="#"/></figure>
-                  </div>
-                  <div class="craig">
-                    <h3><%= following.username %></h3>
-                    <span>PHOTOGRAPHER</span>
-                    <ul class="social_icon ">
-
-                       <li><a href="/users/<%= following._id %>"><i class="fa fa-external-link-square" aria-hidden="true"></i></a></li>
-                    </ul>
-                  </div>
-               </div>
+              <div class="team_box text_align_center">
+                <div class="team_img">
+                  <figure><img src="/images/team1.jpg" alt="#" /></figure>
+                </div>
+                <div class="craig">
+                  <h3><%= follower.username %></h3>
+                  <span>PHOTOGRAPHER</span>
+                  <ul class="social_icon">
+                    <li>
+                      <a href="/users/<%= follower._id %>"
+                        ><i
+                          class="fa fa-external-link-square"
+                          aria-hidden="true"
+                        ></i
+                      ></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
             <% } %>
-         </div>
+          </div>
+        </div>
       </div>
-   </div>
-   <% } %>
+      <% } %> <% if(user.followings.length > 0) { %>
+      <div class="team">
+        <div class="container_with">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="titlepage text_align_center">
+                <h2>FOLLOWINGS</h2>
+              </div>
+            </div>
+            <% for (following of user.followings) { %>
+            <div class="col-md-4">
+              <div class="team_box text_align_center">
+                <div class="team_img">
+                  <figure><img src="/images/team1.jpg" alt="#" /></figure>
+                </div>
+                <div class="craig">
+                  <h3><%= following.username %></h3>
+                  <span>PHOTOGRAPHER</span>
+                  <ul class="social_icon">
+                    <li>
+                      <a href="/users/<%= following._id %>"
+                        ><i
+                          class="fa fa-external-link-square"
+                          aria-hidden="true"
+                        ></i
+                      ></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+      <% } %>
     </div>
   </div>
   <!-- end customers  -->
@@ -220,7 +238,9 @@
 
                   <div class="col-md-12">
                     <div class="group_form">
-                      <button class="read_more">Upload File</button>
+                      <button class="read_more" id="uploadFile">
+                        Upload File
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -231,6 +251,26 @@
       </div>
     </div>
   </div>
+  <script>
+    document.getElementById("uploadFile").addEventListener("submit", function(e) {
+  // Butonun tıklanabilirliğini kontrol et
+ 
+  // Formun otomatik olarak sayfa yenileme özelliğini engelle
+  event.preventDefault();
+
+  // Butonun tıklanabilirliğini devre dışı bırak
+  let myButton = document.getElementById("uploadFile");
+  myButton.disabled = true;
+
+  // Buraya form submit edildiğinde yapılmasını istediğiniz işlemleri ekleyebilirsiniz
+
+
+  // Form submit işlemi tamamlandığında butonun tıklanabilirliğini geri aç
+  myButton.disabled = false;
+});
+
+
+  </script>
   <!-- end footer -->
   <%- include("partials/_footer") %>
 </body>
