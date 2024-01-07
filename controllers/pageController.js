@@ -17,7 +17,7 @@ const getIndexPage = async (req, res) => {
 };
 
 const getAboutPage = (req, res) => {
-  res.render("about", {
+    res.render("about", {
     link: "about",
   });
 };

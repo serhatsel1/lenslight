@@ -29,21 +29,18 @@ const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-
     const user = await User.findOne({
       $or: [{ username: username }, { email: username }],
     });
 
-
-
     let same = false;
-
+    console.log(user);
     if (user) {
       same = await bcrypt.compare(password, user.password);
     } else {
       return res.status(401).json({
         succeded: false,
-        err: "Kullanıcı bulunanamdı",
+        errUsername: "username is wrong",
       });
     }
     if (same) {
@@ -56,7 +53,7 @@ const loginUser = async (req, res) => {
     } else {
       res.status(401).json({
         succeded: false,
-        error: "şifre!!",
+        errPassword: "password is wrong",
       });
     }
   } catch (error) {

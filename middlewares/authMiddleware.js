@@ -11,6 +11,7 @@ const checkUser = (req, res, next) => {
         res.locals.user = null;
       } else {
         const user = await User.findById(decodedToken.userId);
+        res.deneme = "hakan adam bacaksız"
         res.locals.user = user;
         next();
       }
